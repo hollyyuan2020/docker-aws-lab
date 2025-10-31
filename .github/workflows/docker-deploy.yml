@@ -22,6 +22,12 @@ jobs:
       - name: Save Docker image as tar
         run: docker save my-app -o my-app.tar
 
+      - name: Fix permissions on image tar
+        run: |
+          sudo chown "$USER:$USER" my-app.tar
+          chmod 644 my-app.tar
+          ls -l my-app.tar
+
       - name: Show host and enable verbose SSH
         run: |
           echo "HOST=${{ secrets.AWS_HOST }}"
