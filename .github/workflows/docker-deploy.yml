@@ -61,7 +61,20 @@ jobs:
           username: ec2-user
           key: ${{ secrets.AWS_PRIVATE_KEY }}
           script: |
+            set -e
+            # load image
             docker load -i ~/my-app.tar
-            docker stop my-app || true
-            docker rm my-app || true
-            docker run -d -p 80:5000 --name my-app my-app
+
+            # stop & remove any container named my-app (if present)
+            docker rm -f my-app || true
+
+            # free port 80 from ANY container that currently publishes it
+            docker ps --format '{{.ID}} {{.Ports}}' \
+              | awk '/:80->/ {print $1}' \
+              | xargs -r docker rm -f
+
+            # run the new container (auto-restart on reboot)
+            docker run -d --restart unless-stopped -p 80:5000 --name my-app my-app
+
+            # show status for debugging
+            docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}'
