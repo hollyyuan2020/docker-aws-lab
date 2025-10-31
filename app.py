@@ -13,11 +13,11 @@ def home():
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UW–Stout • CNIT 371</title>
+<title>UW–Stout • CNIT 381</title>
 <style>
   :root {
-    --stout-navy: #003865;  /* UW–Stout Navy */
-    --stout-gold: #F1BE48;  /* UW–Stout Gold */
+    --stout-navy: #003865;
+    --stout-gold: #F1BE48;
     --bg: #0a1c2a;
     --card: #0f2a45;
     --text: #ffffff;
@@ -33,7 +33,7 @@ def home():
   }
   body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     color: var(--text);
     background: radial-gradient(1200px 600px at 10% -10%, #004a82 0%, #001d34 60%, #00121f 100%);
     min-height: 100vh; display: grid; place-items: center;
@@ -48,7 +48,7 @@ def home():
   }
   .badge {
     display:inline-block; padding:6px 12px; border-radius:999px;
-    background: var(--stout-gold); color:#1a1a1a; font-weight:700; letter-spacing:.25px;
+    background: var(--stout-gold); color:#1a1a1a; font-weight:700;
   }
   h1{ margin:.35rem 0 0.25rem; font-size: clamp(1.8rem, 3vw, 2.3rem); }
   p.lead{ margin:.25rem 0 1.1rem; color: var(--muted); font-size: 1.05rem; }
@@ -61,26 +61,22 @@ def home():
   .btn {
     background: var(--stout-navy); color:#fff; border:none; padding:10px 14px;
     border-radius:12px; font-weight:600; cursor:pointer;
-    box-shadow: 0 8px 20px rgba(0,56,101,.35);
   }
   .btn:hover{ filter: brightness(1.05); }
-  .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
-  .left h2{ margin:.2rem 0; font-size: clamp(1.4rem, 2.4vw, 1.6rem);}
+  footer{ margin-top:14px; font-size:.95rem; color:var(--muted);}
   .tag{ color: var(--stout-gold); font-weight:700;}
-  footer{ margin-top:14px; font-size:.92rem; color:var(--muted);}
-  .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  .mono{ font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .slogan { margin-top: 1rem; font-size: 1.1rem; color: var(--stout-gold); font-weight: bold; }
 </style>
 </head>
 <body>
   <div class="card">
-    <div class="row">
-      <div class="left">
-        <span class="badge">UW–Stout • CNIT 371</span>
-        <h1>🚀 Welcome to your Docker + GitHub Actions demo</h1>
-        <p class="lead">A clean, UW–Stout–themed Flask app running in a container on EC2.</p>
-      </div>
-      <button id="theme" class="btn" aria-label="Toggle light/dark mode">🌙 Theme</button>
-    </div>
+    <span class="badge">UW–Stout • CNIT 381</span>
+    <h1>🚀 Welcome to your Docker + GitHub Actions demo</h1>
+    <p class="lead">A clean, UW–Stout–themed Flask app running in a container on EC2.</p>
+    <p class="slogan">UW–Stout CNIT — The best computer networking program in the universe!</p>
+
+    <button id="theme" class="btn">🌙 Theme</button>
 
     <div class="grid">
       <div class="panel">
@@ -103,11 +99,9 @@ def home():
   </div>
 
 <script>
-  // light/dark toggle with localStorage
-  const key = "cnit371-theme";
+  const key = "cnit381-theme";
   const saved = localStorage.getItem(key);
   if (saved === "light") document.body.classList.add("light");
-
   document.getElementById("theme").addEventListener("click", () => {
     document.body.classList.toggle("light");
     localStorage.setItem(key, document.body.classList.contains("light") ? "light" : "dark");
@@ -119,8 +113,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-app = Flask(__name__)
-@app.route('/')
-def hello():
 
-    app.run(host='0.0.0.0', port=5000)
